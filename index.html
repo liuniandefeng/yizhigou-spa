@@ -999,25 +999,10 @@
 <body>
     <!-- Banner Section -->
     <section class="video-hero">
-        <div style="position:relative;width:100%;">
+        <a href="#小程序://壹直购积分商城/kuxnvA8LnGw8UaI" style="display:block;">
             <img src="images/banner.png" alt="壹直购" style="width:100%;display:block;">
-            <a href="weixin://dl/business/?t=abcdefghijklmnop" id="miniprogram-link" style="display:none;"></a>
-            <div onclick="jumpToMiniprogram()" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#ff6b00,#ff8f00);color:#fff;padding:12px 30px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(255,107,0,0.4);">
-                立即进入小程序
-            </div>
-        </div>
+        </a>
     </section>
-    <script>
-    function jumpToMiniprogram() {
-        // 尝试使用小程序链接
-        var link = 'https://wxaurl.nlbaoke.com/kuxnvA8LnGw8UaI';
-        window.location.href = link;
-        // 如果上面的链接不行，尝试复制
-        setTimeout(function(){
-            prompt('如无法自动跳转，请复制以下链接在微信中打开：', '#小程序://壹直购积分商城/kuxnvA8LnGw8UaI');
-        }, 500);
-    }
-    </script>
 
     <!-- FAQ Section -->
     <section class="faq-section">
