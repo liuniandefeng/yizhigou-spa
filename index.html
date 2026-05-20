@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>壹直购</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #1a237e 0%, #0d47a1 30%, #00838f 70%, #00acc1 100%);
+            --accent-orange: #ff6f00;
+            --accent-gold: #ffc107;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #1a1a2e;
+            --text-gray: #546e7a;
+            --text-light: #90a4ae;
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.12);
+            --shadow-strong: 0 12px 60px rgba(0, 0, 0, 0.2);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f5f7fa 0%, #e8eef5 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: var(--primary-gradient);
+            padding: 20px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,172,193,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            object-fit: contain;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-header {
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fff 0%, #e3f2fd 100%);
+            color: #1a237e;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* Video Hero Section */
+        .video-hero {
+            padding: 0;
+            position: relative;
+        }
+
+        .video-container {
+            max-width: 100%;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+            border-radius: var(--radius-lg);
+        }
+
+        .hero-video::-webkit-media-controls {
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        .video-placeholder {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #0d47a1 0%, #006064 50%, #00838f 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.01);
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 50px rgba(0,0,0,0.4); }
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 24px solid #1a237e;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            margin-left: 6px;
+        }
+
+        .video-title {
+            position: relative;
+            z-index: 2;
+            margin-top: 20px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .video-views {
+            position: relative;
+            z-index: 2;
+            margin-top: 8px;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-views::before {
+            content: '👁';
+            font-size: 14px;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .float-card {
+            position: absolute;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: floatCard 4s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .float-card:nth-child(1) {
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .float-card:nth-child(2) {
+            top: 60%;
+            right: 5%;
+            animation-delay: 1s;
+        }
+
+        .float-card:nth-child(3) {
+            bottom: 20%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 30px 24px;
+            background: linear-gradient(180deg, #f5f7fa 0%, #fff 100%);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-tag {
+            background: linear-gradient(135deg, #ff6f00, #ff8f00);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255,111,0,0.3);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 0;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-medium);
+            border-color: rgba(0,172,193,0.2);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 20px;
+            width: 100%;
+        }
+
+        .faq-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .faq-text {
+            font-size: 15px;
+            font-weight: 500;
+            flex: 1;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .faq-arrow {
+            width: 24px;
+            height: 24px;
+            color: var(--text-light);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+
+        .faq-item.active .faq-arrow {
+            transform: rotate(90deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            background: #f8fafc;
+            padding: 0 20px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 16px 20px;
+        }
+
+        .faq-answer-text {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Platform Intro */
+        .platform-intro {
+            padding: 30px 24px;
+            background: #fff;
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, #e8eaf6 0%, #e1f5fe 100%);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(26,35,126,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .intro-title {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a237e, #00838f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .intro-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.8);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-dark);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .intro-feature-icon {
+            font-size: 20px;
+        }
+
+        .hotline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #1a237e, #0d47a1);
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .hotline-icon {
+            font-size: 20px;
+        }
+
+        .hotline-number {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 30px 24px 50px;
+            background: linear-gradient(180deg, #fff 0%, #f5f7fa 100%);
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 10px 20px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            border-color: #00acc1;
+            color: #00838f;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1a237e, #00838f);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(26,35,126,0.3);
+        }
+
+        /* Process Cards Grid */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .process-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .process-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .process-thumbnail {
+            aspect-ratio: 4/3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-thumbnail-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .process-thumbnail-bg.platform {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #5c6bc0 100%);
+        }
+
+        .process-thumbnail-bg.physical {
+            background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 50%, #ffa000 100%);
+        }
+
+        .process-thumbnail-bg.phone {
+            background: linear-gradient(135deg, #00838f 0%, #00acc1 50%, #26c6da 100%);
+        }
+
+        .process-thumbnail-bg.jdcard {
+            background: linear-gradient(135deg, #c62828 0%, #d32f2f 50%, #e53935 100%);
+        }
+
+        .process-thumbnail-bg.sinopec {
+            background: linear-gradient(135deg, #f57c00 0%, #fb8c00 50%, #ff9800 100%);
+        }
+
+        .process-thumbnail-bg.petro {
+            background: linear-gradient(135deg, #e65100 0%, #ef6c00 50%, #f57c00 100%);
+        }
+
+        .process-thumbnail-bg.digital {
+            background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%);
+        }
+
+        .process-3d-icon {
+            font-size: 32px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .process-play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .process-card:hover .process-play-overlay {
+            opacity: 1;
+        }
+
+        .process-play-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .process-play-btn::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 0 6px 10px;
+            border-color: transparent transparent transparent #1a237e;
+            margin-left: 2px;
+        }
+
+        .process-info {
+            padding: 8px 10px;
+        }
+
+        .process-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0 0 2px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .process-desc {
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+
+        /* Process Cover Image */
+        .process-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .process-view-btn {
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a237e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Flow Modal */
+        .flow-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .flow-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-modal-content {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .flow-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            background: linear-gradient(135deg, #1a237e, #00838f);
+        }
+
+        .flow-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+        }
+
+        .flow-modal-close {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .flow-modal-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .flow-modal-body {
+            padding: 0;
+            overflow-y: auto;
+            max-height: calc(90vh - 80px);
+        }
+
+        .flow-modal-body img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Download Section */
+        .download-section {
+            padding: 30px 24px 40px;
+            background: linear-gradient(180deg, #f5f7fa 0%, #e8eef5 100%);
+        }
+
+        .download-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .download-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .download-subtitle {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .download-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .download-btn.ios {
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(26,35,126,0.3);
+        }
+
+        .download-btn.ios:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26,35,126,0.4);
+        }
+
+        .download-btn.android {
+            background: #fff;
+            color: var(--text-dark);
+            border: 2px solid #e0e0e0;
+        }
+
+        .download-btn.android:hover {
+            border-color: #00acc1;
+            background: #f5f7fa;
+        }
+
+        .download-icon {
+            font-size: 20px;
+        }
+
+        /* Floating Customer Service */
+        .float-service {
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 100;
+        }
+
+        .service-btn {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1a237e, #00838f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(26,35,126,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .service-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .service-btn::before {
+            content: '🎧';
+            font-size: 24px;
+        }
+
+        .service-label {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26,35,126,0.95);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .float-service:hover .service-label {
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px 24px;
+            background: #fff;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .btn-header {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .intro-features {
+                grid-template-columns: 1fr;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner Section -->
+    <section class="video-hero">
+        <div class="video-container" style="cursor:pointer;" onclick="window.open('#小程序://壹直购积分商城/kuxnvA8LnGw8UaI', '_self')">
+            <img src="images/banner.png" alt="壹直购" style="width:100%;display:block;">
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <span class="section-tag">常见问题</span>
+            <h2 class="section-title">帮助中心</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item fade-in" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <div class="faq-icon">❓</div>
+                    <span class="faq-text">如何在壹直购平台注册账号？</span>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">微信搜索【壹直购】小程序，使用手机号进行注册，填写验证码即可完成注册。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <div class="faq-icon">💳</div>
+                    <span class="faq-text">积分如何兑换商品？</span>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">登录后在"线上商城"选择心仪商品，确认积分余额充足后点击兑换，填写收货地址即可完成兑换。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <div class="faq-icon">⛽</div>
+                    <span class="faq-text">油卡充值多久到账？</span>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">石化卡、石油券充值一般为实时到账，如遇高峰期可能在1-2小时内到账。如超过24小时未到账请联系客服。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <div class="faq-icon">🎁</div>
+                    <span class="faq-text">如何领取和使用我的积分？</span>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text"><strong>当您的积分在"壹直购好伙伴"系统里发放成功后，请按照以下简单步骤操作：</strong></p>
+                    <p class="faq-answer-text"><strong>第一步：领取积分</strong></p>
+                    <p class="faq-answer-text">1、打开微信，搜索并进入「壹直购」官方小程序；</p>
+                    <p class="faq-answer-text">2、登录您的账号（确保与发放积分手机号一致）；</p>
+                    <p class="faq-answer-text">3、在小程序个人中心，找到【领取积分】入口，点击进入输入个人信息即可领取积分到您的消费账户。</p>
+                    <p class="faq-answer-text"><strong>第二步：使用积分</strong></p>
+                    <p class="faq-answer-text">成功领取后，您就可以直接在「壹直购积分商城」中，使用积分兑换您心仪的商品、权益或其他礼品。</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <div class="faq-icon">🔒</div>
+                    <span class="faq-text">平台安全有保障吗？</span>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p class="faq-answer-text">壹直购采用银行级安全加密技术，所有交易均经过严格的安全验证，保障您的账户和资金安全。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Introduction -->
+    <section class="platform-intro">
+        <div class="intro-card">
+            <h2 class="intro-title">平台介绍</h2>
+            <p class="intro-text">
+                壹直购平台专注于"人·车·生活"全场景生态体验，通过积分通兑加油、充电、洗车、汽车保养、续保维保、道路救援、多元化虚拟权益及海量实物商品等服务，为企业客户提供一站式车主权益普惠服务，壹键直达，养车无忧。让每位车主尽享高性价比的人车生活。
+            </p>
+            <div class="hotline">
+                <span class="hotline-icon">📞</span>
+                客服热线：
+                <span class="hotline-number">400-6989-822</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="section-header">
+            <span class="section-tag">使用流程</span>
+            <h2 class="section-title">产品操作指南</h2>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'all')">全部</button>
+            <button class="tab-btn" onclick="switchTab(this, 'jdcard')">京东卡</button>
+            <button class="tab-btn" onclick="switchTab(this, 'sinopec')">石化卡</button>
+            <button class="tab-btn" onclick="switchTab(this, 'petro')">石油券</button>
+            <button class="tab-btn" onclick="switchTab(this, 'digital')">数字卡券</button>
+        </div>
+
+        <!-- Process Grid -->
+        <div class="process-grid" id="processGrid">
+            <!-- 滴滴代驾券 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/didi_05.jpg" alt="滴滴代驾券" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/didi_05.jpg', '滴滴代驾券兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">滴滴代驾券</h3>
+                    <p class="process-desc">兑换与使用指南</p>
+                </div>
+            </div>
+
+            <!-- 合力超市 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/helichao_01.png" alt="合力超市" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/helichao_01.png', '合力超市兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">合力超市</h3>
+                    <p class="process-desc">礼品卡兑换使用流程</p>
+                </div>
+            </div>
+
+            <!-- 星星充电 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/xingxing_06.png" alt="星星充电" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/xingxing_06.png', '星星充电卡券使用流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">星星充电</h3>
+                    <p class="process-desc">充电卡券兑换使用</p>
+                </div>
+            </div>
+
+            <!-- 中石油电子券 -->
+            <div class="process-card fade-in" data-category="petro">
+                <div class="process-thumbnail">
+                    <img src="images/zhongshiyou_04.png" alt="中石油电子券" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/zhongshiyou_04.png', '中石油电子券使用流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">中石油电子券</h3>
+                    <p class="process-desc">加油券充值与使用</p>
+                </div>
+            </div>
+
+            <!-- 飞泊通 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/feibotong_07.png" alt="飞泊通" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/feibotong_07.png', '飞泊通兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">飞泊通</h3>
+                    <p class="process-desc">机场停车代泊服务</p>
+                </div>
+            </div>
+
+            <!-- 唯品会 -->
+            <div class="process-card fade-in" data-category="all">
+                <div class="process-thumbnail">
+                    <img src="images/vip_03.png" alt="唯品会" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/vip_03.png', '唯品会兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">唯品会</h3>
+                    <p class="process-desc">唯品卡充值使用流程</p>
+                </div>
+            </div>
+
+            <!-- 途虎养车 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/tuhu-exchange.png" alt="途虎养车" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/tuhu-exchange.png', '途虎养车兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">途虎养车</h3>
+                    <p class="process-desc">途虎养车兑换流程</p>
+                </div>
+            </div>
+
+            <!-- E代驾 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/edaijia-exchange.png" alt="E代驾" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/edaijia-exchange.png', 'E代驾使用流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">E代驾</h3>
+                    <p class="process-desc">E代驾使用流程</p>
+                </div>
+            </div>
+
+            <!-- 中石化充值卡 -->
+            <div class="process-card fade-in" data-category="sinopec">
+                <div class="process-thumbnail">
+                    <img src="images/zhongshihua-exchange.png" alt="中石化充值卡" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/zhongshihua-exchange.png', '中石化充值卡兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">中石化充值卡</h3>
+                    <p class="process-desc">中石化充值卡兑换流程</p>
+                </div>
+            </div>
+
+            <!-- 天猫超市卡 -->
+            <div class="process-card fade-in" data-category="digital">
+                <div class="process-thumbnail">
+                    <img src="images/tmall-exchange.png" alt="天猫超市卡" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/tmall-exchange.png', '天猫超市卡兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">天猫超市卡</h3>
+                    <p class="process-desc">天猫超市卡兑换流程</p>
+                </div>
+            </div>
+
+            <!-- 京东E卡 -->
+            <div class="process-card fade-in" data-category="jdcard">
+                <div class="process-thumbnail">
+                    <img src="images/jd-ek-exchange.png" alt="京东E卡" class="process-cover">
+                    <div class="process-play-overlay" onclick="openFlowModal('images/jd-ek-exchange.png', '京东E卡兑换流程')">
+                        <div class="process-view-btn">查看流程</div>
+                    </div>
+                </div>
+                <div class="process-info">
+                    <h3 class="process-name">京东E卡</h3>
+                    <p class="process-desc">京东E卡兑换流程</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flow Modal -->
+    <div id="flowModal" class="flow-modal">
+        <div class="flow-modal-content">
+            <div class="flow-modal-header">
+                <h3 id="flowModalTitle" class="flow-modal-title"></h3>
+                <button class="flow-modal-close" onclick="closeFlowModal()">&times;</button>
+            </div>
+            <div class="flow-modal-body">
+                <img id="flowModalImage" src="" alt="流程图">
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Customer Service -->
+    <div class="float-service">
+        <span class="service-label">联系客服</span>
+        <button class="service-btn" onclick="contactService()"></button>
+    </div>
+
+
+
+    <script>
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const allFaqs = document.querySelectorAll('.faq-item');
+            allFaqs.forEach(faq => {
+                if (faq !== element) {
+                    faq.classList.remove('active');
+                }
+            });
+            element.classList.toggle('active');
+        }
+
+        // Tab Switch
+        function switchTab(btn, category) {
+            const allTabs = document.querySelectorAll('.tab-btn');
+            allTabs.forEach(tab => tab.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.process-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.4s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Play Video
+        function playVideo(element) {
+            // Simulate video play - in real implementation, this would open a video player
+            const playBtn = element.querySelector('.play-button');
+            playBtn.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                playBtn.style.transform = '';
+                alert('视频播放功能：在实际项目中，这里会打开视频播放器播放平台介绍视频。');
+            }, 150);
+        }
+
+        // Scroll to Download
+        function scrollToDownload() {
+            document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Contact Service
+        function contactService() {
+            alert('客服热线：400-888-9999\n\n工作时间：周一至周日 9:00-21:00');
+        }
+
+        // Flow Modal Functions
+        function openFlowModal(imageSrc, title) {
+            event.stopPropagation();
+            const modal = document.getElementById('flowModal');
+            const modalImage = document.getElementById('flowModalImage');
+            const modalTitle = document.getElementById('flowModalTitle');
+            
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFlowModal() {
+            const modal = document.getElementById('flowModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('flowModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFlowModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFlowModal();
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Smooth scroll for internal navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
