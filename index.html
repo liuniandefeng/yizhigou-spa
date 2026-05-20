@@ -496,7 +496,7 @@
 
         .hotline {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
             margin-top: 20px;
             padding: 14px 20px;
@@ -508,9 +508,16 @@
 
         .hotline-icon {
             font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .hotline-number {
+        .hotline-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hotline-info div:first-child {
             font-weight: 700;
             font-size: 16px;
             letter-spacing: 1px;
@@ -1066,8 +1073,11 @@
             </p>
             <div class="hotline">
                 <span class="hotline-icon">📞</span>
-                客服热线：
-                <span class="hotline-number">400-6989-822</span>
+                <div class="hotline-info">
+                    <div>客服热线：400-6989-822</div>
+                    <div>工作日服务时间：8:30-19:00</div>
+                    <div>节假日服务时间：9:00-18:00</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1314,7 +1324,7 @@
 
         // Contact Service
         function contactService() {
-            alert('客服热线：400-888-9999\n\n工作时间：周一至周日 9:00-21:00');
+            alert('客服热线：400-6989-822\n\n工作日服务时间：8:30-19:00\n节假日服务时间：9:00-18:00');
         }
 
         // Flow Modal Functions
